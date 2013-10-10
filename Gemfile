@@ -8,6 +8,7 @@ gem 'rails', '3.2.13'
 group :development, :test do
 	gem 'rspec-rails'
 	gem 'sqlite3'
+	gem 'capybara'
 end
 
 group :production do
@@ -27,6 +28,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
