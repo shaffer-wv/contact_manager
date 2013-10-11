@@ -37,7 +37,6 @@ describe 'the person view', type: :feature do
 	end
 
 	it 'edits a phone number' do
-		pending
 		phone = person.phone_numbers.first
 		old_number = phone.number
 
