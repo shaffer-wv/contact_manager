@@ -54,6 +54,13 @@ describe 'the person view', type: :feature do
 				expect(page).to have_link('Delete', href: phone_number_path(phone))
 			end
 		end
+
+		it 'deletes a phone number' do
+			phone = person.phone_numbers.first
+			old_number = phone.number
+			first(:link, 'Delete').click
+			expect(page).to_not have_content(old_number)
+		end
 	end
 
 	describe 'the email addresses view' do
@@ -102,6 +109,13 @@ describe 'the person view', type: :feature do
 			person.email_addresses.each do |email|
 				expect(page).to have_link('Delete', href: email_address_path(email))
 			end
+		end
+
+		it 'deletes an email address' do
+			email = person.email_addresses.first
+			old_email = email.address
+			first(:link, 'Delete').click
+			expect(page).to_not have_content(old_email)
 		end
 	end
 

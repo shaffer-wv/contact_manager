@@ -14,7 +14,7 @@
   <b>Phone Numbers:</b>
 	<ul>
 		<%= @person.phone_numbers.each do |phone| %>
-			<li><%= phone.number %> <%= link_to('edit', edit_phone_number_path(phone)) %> | <%= link_to('Delete', phone_number_path(phone)) %><li>
+			<li><%= phone.number %> <%= link_to('edit', edit_phone_number_path(phone)) %> | <%= link_to 'Delete', phone, method: :delete, data: { confirm: 'Are you sure?' } %><li>
 		<% end %>
 	</ul>
 </p>
@@ -23,7 +23,7 @@
 	<b>Email Addresses:</b>
 	<ul>
 		<%= @person.email_addresses.each do |email| %>
-			<li><%= email.address %> <%= link_to('edit', edit_email_address_path(email)) %> | <%= link_to('Delete', email_address_path(email)) %></li>
+			<li><%= email.address %> <%= link_to('edit', edit_email_address_path(email)) %> | <%= link_to 'Delete', email, method: :delete, data: { confirm: 'Are you sure?' } %></li>
 		<% end %>
 	</ul>
 </p>
