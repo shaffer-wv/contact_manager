@@ -23,7 +23,7 @@ describe EmailAddressesController do
   # This should return the minimal set of attributes required to create a valid
   # EmailAddress. As you add validations to EmailAddress, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "address" => "MyString", person_id: 4 } }
+  let(:valid_attributes) { { "address" => "MyString", contact_id: 4, contact_type: 'Company' } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -63,7 +63,7 @@ describe EmailAddressesController do
 
   describe "POST create" do
     let(:alice) { Person.create(first_name: 'Alice', last_name: 'Smith' ) }
-    let(:valid_attributes) { {address: 'yep@yahoo.com', person_id: alice.id} }
+    let(:valid_attributes) { {address: 'yep@yahoo.com', contact_id: alice.id, contact_type: 'Person'} }
 
     describe "with valid params" do
       it "creates a new EmailAddress" do
@@ -103,7 +103,7 @@ describe EmailAddressesController do
 
   describe "PUT update" do
     let(:bob) { Person.create(first_name: 'Bob', last_name: 'Jones') }
-    let(:valid_attributes) { {address: 'yep@yahoo.com', person_id: bob.id} }
+    let(:valid_attributes) { {address: 'yep@yahoo.com', contact_id: bob.id, contact_type: 'Person'} }
 
     describe "with valid params" do
       it "updates the requested email_address" do
@@ -123,7 +123,7 @@ describe EmailAddressesController do
       end
 
       it "redirects to the email_address's person" do
-        valid_attributes = {address: 'test@gmail.com', person_id: bob.id}
+        valid_attributes = {address: 'test@gmail.com', contact_id: bob.id, contact_type: 'Person'}
         email_address = EmailAddress.create! valid_attributes
         put :update, {:id => email_address.to_param, :email_address => valid_attributes}, valid_session
         expect(response).to redirect_to(bob)
@@ -151,7 +151,7 @@ describe EmailAddressesController do
 
   describe "DELETE destroy" do
     let(:bob) { Person.create(first_name: 'Bob', last_name: 'Jones') }
-    let(:valid_attributes) { {address: 'yep@yahoo.com', person_id: bob.id} }
+    let(:valid_attributes) { {address: 'yep@yahoo.com', contact_id: bob.id, contact_type: 'Person'} }
 
     it "destroys the requested email_address" do
       email_address = EmailAddress.create! valid_attributes
