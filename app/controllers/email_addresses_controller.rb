@@ -1,25 +1,6 @@
 class EmailAddressesController < ApplicationController
-  # GET /email_addresses
-  # GET /email_addresses.json
-  def index
-    @email_addresses = EmailAddress.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @email_addresses }
-    end
-  end
-
-  # GET /email_addresses/1
-  # GET /email_addresses/1.json
-  def show
-    @email_address = EmailAddress.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @email_address }
-    end
-  end
+  before_filter :lookup_email_address, only: [:edit, :update, :destroy]
 
   # GET /email_addresses/new
   # GET /email_addresses/new.json
@@ -34,7 +15,7 @@ class EmailAddressesController < ApplicationController
 
   # GET /email_addresses/1/edit
   def edit
-    @email_address = EmailAddress.find(params[:id])
+    
   end
 
   # POST /email_addresses
@@ -56,8 +37,6 @@ class EmailAddressesController < ApplicationController
   # PUT /email_addresses/1
   # PUT /email_addresses/1.json
   def update
-    @email_address = EmailAddress.find(params[:id])
-
     respond_to do |format|
       if @email_address.update_attributes(params[:email_address])
         format.html { redirect_to @email_address.contact, notice: 'Email address was successfully updated.' }
@@ -72,7 +51,6 @@ class EmailAddressesController < ApplicationController
   # DELETE /email_addresses/1
   # DELETE /email_addresses/1.json
   def destroy
-    @email_address = EmailAddress.find(params[:id])
     @email_address.destroy
 
     respond_to do |format|
@@ -81,3 +59,8 @@ class EmailAddressesController < ApplicationController
     end
   end
 end
+
+private
+  def lookup_email_address
+    @email_address = EmailAddress.find(params[:id])
+  end

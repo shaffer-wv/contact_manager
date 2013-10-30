@@ -1,4 +1,7 @@
 class CompaniesController < ApplicationController
+
+  before_filter :lookup_company, only: [:show, :edit, :update, :destroy]
+
   # GET /companies
   # GET /companies.json
   def index
@@ -13,8 +16,6 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
-    @company = Company.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @company }
@@ -33,8 +34,7 @@ class CompaniesController < ApplicationController
   end
 
   # GET /companies/1/edit
-  def edit
-    @company = Company.find(params[:id])
+  def edit    
   end
 
   # POST /companies
@@ -56,8 +56,6 @@ class CompaniesController < ApplicationController
   # PUT /companies/1
   # PUT /companies/1.json
   def update
-    @company = Company.find(params[:id])
-
     respond_to do |format|
       if @company.update_attributes(params[:company])
         format.html { redirect_to @company, notice: 'Company was successfully updated.' }
@@ -72,7 +70,6 @@ class CompaniesController < ApplicationController
   # DELETE /companies/1
   # DELETE /companies/1.json
   def destroy
-    @company = Company.find(params[:id])
     @company.destroy
 
     respond_to do |format|
@@ -81,3 +78,8 @@ class CompaniesController < ApplicationController
     end
   end
 end
+
+private
+  def lookup_company
+    @company = Company.find(params[:id])
+  end

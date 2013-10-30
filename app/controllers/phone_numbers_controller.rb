@@ -1,26 +1,7 @@
 class PhoneNumbersController < ApplicationController
-  # GET /phone_numbers
-  # GET /phone_numbers.json
-  def index
-    @phone_numbers = PhoneNumber.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @phone_numbers }
-    end
-  end
-
-  # GET /phone_numbers/1
-  # GET /phone_numbers/1.json
-  def show
-    @phone_number = PhoneNumber.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @phone_number }
-    end
-  end
-
+  
+  before_filter :lookup_phone_number, only: [:edit, :update, :destroy]
+  
   # GET /phone_numbers/new
   # GET /phone_numbers/new.json
   def new
@@ -34,7 +15,7 @@ class PhoneNumbersController < ApplicationController
 
   # GET /phone_numbers/1/edit
   def edit
-    @phone_number = PhoneNumber.find(params[:id])
+   
   end
 
   # POST /phone_numbers
@@ -56,8 +37,6 @@ class PhoneNumbersController < ApplicationController
   # PUT /phone_numbers/1
   # PUT /phone_numbers/1.json
   def update
-    @phone_number = PhoneNumber.find(params[:id])
-
     respond_to do |format|
       if @phone_number.update_attributes(params[:phone_number])
         format.html { redirect_to @phone_number.contact, notice: 'Phone number was successfully updated.' }
@@ -72,7 +51,6 @@ class PhoneNumbersController < ApplicationController
   # DELETE /phone_numbers/1
   # DELETE /phone_numbers/1.json
   def destroy
-    @phone_number = PhoneNumber.find(params[:id])
     @phone_number.destroy
 
     respond_to do |format|
@@ -81,3 +59,8 @@ class PhoneNumbersController < ApplicationController
     end
   end
 end
+
+private
+  def lookup_phone_number
+    @phone_number = PhoneNumber.find(params[:id])
+  end
