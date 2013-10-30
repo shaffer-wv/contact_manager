@@ -5,14 +5,7 @@
   <%= @company.name %>
 </p>
 
-<p>
-  <b>Phone Numbers:</b>
-	<ul>
-		<%= @company.phone_numbers.each do |phone| %>
-			<li><%= phone.number %> <%= link_to('edit', edit_phone_number_path(phone)) %> | <%= link_to 'Delete', phone, method: :delete, data: { confirm: 'Are you sure?' } %><li>
-		<% end %>
-	</ul>
-</p>
+<%= render 'phone_numbers/phone_numbers', phone_numbers: @company.phone_numbers %>
 
 <p>
 	<b>Email Addresses:</b>
