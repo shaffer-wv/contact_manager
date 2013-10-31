@@ -7,14 +7,7 @@
 
 <%= render 'phone_numbers/phone_numbers', phone_numbers: @company.phone_numbers %>
 
-<p>
-	<b>Email Addresses:</b>
-	<ul>
-		<%= @company.email_addresses.each do |email| %>
-			<li><%= email.address %> <%= link_to('edit', edit_email_address_path(email)) %> | <%= link_to 'Delete', email, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-		<% end %>
-	</ul>
-</p>
+<%= render 'email_addresses/email_addresses', email_addresses: @company.email_addresses %>
 
 <%= link_to 'Add Phone Number', new_phone_number_path(contact_id: @company.id, contact_type: 'Company') %> |
 <%= link_to 'Add Email Address', new_email_address_path(contact_id: @company.id, contact_type: 'Company') %> |
