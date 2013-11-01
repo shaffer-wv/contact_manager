@@ -28,6 +28,9 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem "haml", "~> 3.1.8"
+gem "hpricot"
+gem "ruby_parser"
 
 
 # To use ActiveModel has_secure_password
